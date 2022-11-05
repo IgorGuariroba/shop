@@ -14,7 +14,7 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
+    price: string;
   }[]
 }
 export default function Home({ products }: HomeProps) {
@@ -22,17 +22,16 @@ export default function Home({ products }: HomeProps) {
     slides: {
       perView: 3,
       spacing: 48,
-    }
+    },
   })
 
   return (
     <HomeContainer ref={sliderRef} className='keen-slider'>
-      {
-        products.map(product => {
+      {products.map(product => {
           return (
-            <Link href={`product/${product.id}`} key={product.id} prefetch={false} >
+            <Link href={`/product/${product.id}`} key={product.id}  prefetch={false} >
               <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={520} height={480} alt={""} />
+                <Image src={product.imageUrl} width={520} height={480} alt="" />
 
                 <footer>
                   <strong>{product.name}</strong>
@@ -41,8 +40,7 @@ export default function Home({ products }: HomeProps) {
               </Product>
             </Link>
           )
-        })
-      }
+        })}
     </HomeContainer>
   )
 }
