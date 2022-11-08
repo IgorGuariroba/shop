@@ -1,3 +1,4 @@
+import axios from "axios"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Image from "next/image"
 import { useRouter } from "next/router"
@@ -12,10 +13,25 @@ interface ProductProps {
     imageUrl: string;
     price: string;
     description: string;
+    defaultPriceId: string;
   }
 }
 
 export default function Product({ product }: ProductProps) {
+
+  async function handlerBuyProduct(){
+    try{
+      const response = await axios.post('/api/checkout',{
+        priceId: product.defaultPriceId,
+      })
+
+      const {checkoutUrl} = response.data;
+
+      window.location.href = checkoutUrl;
+    }catch(err) {
+        alert('Falha ao tentar redirecionar ao checkout')
+    }
+  }
 
   const { isFallback } = useRouter()
 
@@ -34,7 +50,7 @@ export default function Product({ product }: ProductProps) {
 
         <p>{product.description}</p>
 
-        <button>
+        <button onClick={handlerBuyProduct}>
           Comprar agora
         </button>
       </ProductDetails>
@@ -75,6 +91,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         imageUrl: product.images[0],
         price: priceFormatted,
         description: product.description,
+        defaultPriceId: price.id,
       }
     },
     revalidate: 60 * 60 * 1,

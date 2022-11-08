@@ -67,6 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
       price: priceFormatted,
     }
   })
+
   return {
     props: {
       products
