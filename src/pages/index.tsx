@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Head from 'next/head'
 import { HomeContainer, Product } from "../styles/pages/home"
 import Link from 'next/link'
 
@@ -26,10 +27,16 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <HomeContainer ref={sliderRef} className='keen-slider'>
-      {products.map(product => {
+    <>
+      <Head>
+        <title>Home / Shop</title>
+      </Head>
+
+      <HomeContainer ref={sliderRef} className='keen-slider'>
+
+        {products.map(product => {
           return (
-            <Link href={`/product/${product.id}`} key={product.id}  prefetch={false} >
+            <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
               <Product className="keen-slider__slide">
                 <Image src={product.imageUrl} width={520} height={480} alt="" />
 
@@ -41,7 +48,8 @@ export default function Home({ products }: HomeProps) {
             </Link>
           )
         })}
-    </HomeContainer>
+      </HomeContainer>
+    </>
   )
 }
 
