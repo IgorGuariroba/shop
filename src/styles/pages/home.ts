@@ -29,9 +29,8 @@ export const Product = styled('a', {
     footer: {
       position: 'absolute',
       bottom: '0.25rem',
-      left: '0.25rem',
-      right: '0.25rem',
-      padding: '2rem',
+      width: '100%',
+      padding: '2rem 1rem 2rem 1rem',
 
       borderRadius: 6,
 
@@ -45,7 +44,7 @@ export const Product = styled('a', {
       opacity: 0,
       transition: 'all 0.2s ease-in-out',
 
-      sprong: {
+      strong: {
         fontSize: '$lg',
         color: '$gray100',
       },
@@ -55,6 +54,14 @@ export const Product = styled('a', {
         fontWeight: 'bold',
         color: '$green300 ',
       },
+
+      button: {
+        color: '$gray100',
+        backgroundColor: '$green300',
+        border: 'none',
+        padding: '0.55rem',
+        borderRadius: '8px',
+      }
 
     },
 
